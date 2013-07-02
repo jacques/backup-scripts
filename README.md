@@ -45,6 +45,15 @@ public/private key-pair you just use with StrongSpace.
 Copy config.example to config so that the configuration can be sourced by the
 various scripts.
 
+## Contributing
+
+1. Fork it.
+2. Create a branch (git checkout -b fix-for-something)
+3. Commit your changes (git commit -am "[#TICKET] Fixed something")
+4. Push to the branch (git push origin fix-for-something)
+5. Open a Pull Request
+6. Enjoy a refreshing Dr Pepper and wait for the pull request to be merged
+
 ## License
 
 ```
