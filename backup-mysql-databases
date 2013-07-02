@@ -1,0 +1,38 @@
+#!/opt/local/bin/bash
+#
+# Dumps all databases belonging to a user to seperate dump files.
+#
+# Copyright (c) 2013 Jacques Marneweck.  All rights reserved.
+#
+# Expects that you have a ~/.my.cnf configured to allow this script
+# to connect to MySQL in order to dump databases.
+#
+
+if [[ "$1" == "-v" ]]; then
+    shift;
+    export export PS4='[\D{%FT%TZ}] ${BASH_SOURCE}:${LINENO}: ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+    set -o xtrace
+fi
+set -o errexit
+set -o pipefail
+
+#
+# Load the configuration file (see config.example for a sample configuration
+# file)
+#
+source config
+
+if [[ ! -d $BACKUP_BASE_DIR ]]; then
+  /usr/bin/mkdir $BACKUP_BASE_DIR
+  /usr/bin/chmod 700 $BACKUP_BASE_DIR
+fi
+
+if [[ ! -d $BACKUP_BASE_DIR/mysql ]]; then
+  /usr/bin/mkdir $BACKUP_BASE_DIR/mysql
+fi
+
+DATABASES=$(/usr/local/bin/mysql --batch -e "show databases;" | /usr/local/bin/ggrep -v Database | /usr/local/bin/ggrep -v information_schema)
+for db in ${DATABASES[*]}
+do
+  /opt/local/bin/mysqldump --quote-names --dump-date --routines --triggers --opt ${db} | /usr/local/bin/bzip2 -9 > ${BACKUP_BASE_DIR}/mysql/${db}-`date +%Y-%m-%d`.sql.bz2
+done
