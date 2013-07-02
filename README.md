@@ -1,7 +1,8 @@
 # Backup Scripts
 
 Various backup scripts for backing up your Shared Hosting account on TextDrive's
-Shared Hosting service.
+Shared Hosting service.  Can also be used for backing up data on Joyent
+SmartMachines.
 
 ## Getting Started
 
