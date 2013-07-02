@@ -1,0 +1,25 @@
+#
+# Example configuration file
+#
+
+#
+# Directory to backup files to
+#
+BACKUP_BASE_DIR=~/backups
+
+#
+# Number of days to store MySQL database dumps for
+#
+MYSQL_DAYS_TO_KEEP=14
+
+#
+# Number of days to store PostgreSQL database dumps for
+#
+POSTGRES_DATA_TO_KEEP=14
+
+#
+# Backup Host
+#
+BACKUP_HOST=sftp.example.com
+BACKUP_USER=username
+BACKUP_SSH_IDENTITY=example
