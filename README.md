@@ -27,6 +27,19 @@ Expects a ~/.pgpass file to be configured.
 
 Presently supports backing up to a remote SFTP location.
 
+### Generate a SSH public/private key-pair
+
+Generate a public/private key-pair without a passphrase so that backups can be
+uploaded offsite without prompting to enter a password or a pass phrase to unlock
+the ssh private key.
+
+```
+ssh-keygen -t rsa -b 4096 -N ''
+```
+
+You may want to store this to generated key-pair to ~/.ssh/id_rsa-strongspace for a
+public/private key-pair you just use with StrongSpace.
+
 ### Configuration files
 
 Copy config.example to config so that the configuration can be sourced by the
