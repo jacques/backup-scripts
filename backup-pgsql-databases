@@ -1,0 +1,64 @@
+#!/opt/local/bin/bash
+#
+# Dumps all databases belonging to a user to seperate dump files.
+#
+# Copyright (c) 2013 Jacques Marneweck.  All rights reserved.
+#
+# Expects that you have a ~/.pgpass configured to allow this script
+# to connect to PostgreSQL in order to dump databases.
+#
+
+if [[ "$1" == "-v" ]]; then
+    shift;
+    export export PS4='[\D{%FT%TZ}] ${BASH_SOURCE}:${LINENO}: ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+    set -o xtrace
+fi
+set -o errexit
+set -o pipefail
+
+#
+# Check that ~/.pgpass exists
+#
+if [[ ! -f ~/.pgpass ]]; then
+  echo "You need to create the ~/.pgpass file into place"
+  exit 1
+fi
+
+#
+# Check that the config file exitss
+#
+if [[ ! -f config ]]; then
+  echo "You need to copy config.example to config and customise to your liking."
+  exit 1
+fi
+
+#
+# Load the configuration file (see config.example for a sample configuration
+# file)
+#
+source config
+
+#
+# Check that the backups directory exists if not create it and lock down
+# permissions
+#
+if [[ ! -d $BACKUP_BASE_DIR ]]; then
+  /usr/bin/mkdir $BACKUP_BASE_DIR
+  /usr/bin/chmod 700 $BACKUP_BASE_DIR
+fi
+
+if [[ ! -d $BACKUP_BASE_DIR/pgsql ]]; then
+  /usr/bin/mkdir $BACKUP_BASE_DIR/pgsql
+fi
+
+#
+# Clean up the pgsql dumps directory to the specified number of days worth of
+# PostgreSQL dump files to keep around.
+#
+cd ${BACKUP_BASE_DIR}/pgsql
+/opt/local/bin/gfind *.sql.bz2 -mtime +${PGSQL_DAYS_TO_KEEP} -delete
+
+#
+# Upload the backup files to a remote server
+#
+/opt/local/bin/rsync -avz ${RSYNC_OPTS} -e "ssh -i ${HOME}/.ssh/id_rsa-${BACKUP_SSH_IDENTITY}" ${BACKUP_BASE_DIR}/pgsql ${BACKUP_USER}@${BACKUP_HOST}:${BACKUP_REMOTE_DIR}
