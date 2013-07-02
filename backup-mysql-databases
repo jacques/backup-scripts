@@ -67,7 +67,7 @@ done
 # MySQL dump files to keep around.
 #
 cd ${BACKUP_BASE_DIR}/mysql
-/usr/local/bin/gfind *.sql.bz2 -mtime +${MYSQL_DAYS_TO_KEEP} -delete
+/opt/local/bin/gfind *.sql.bz2 -mtime +${MYSQL_DAYS_TO_KEEP} -delete
 
 #
 # Upload the backup files to a remote server
