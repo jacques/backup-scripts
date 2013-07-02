@@ -27,6 +27,51 @@ Expects a ~/.pgpass file to be configured.
 
 Presently supports backing up to a remote SFTP location.
 
+```
+#
+# Backup Host
+#
+BACKUP_HOST=sftp.example.com
+BACKUP_USER=username
+BACKUP_SSH_IDENTITY=example
+BACKUP_REMOTE_DIR=/path/to/backups/
+
+RSYNC_OPTS=--delete-after
+```
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>BACKUP_HOST</td>
+    <td>string</td>
+    <td>Hostname or IP Address of the server where files are backed up to</td>
+    <td>sftp.siberia.co.za</td>
+  </tr>
+  <tr>
+    <td>BACKUP_USER</td>
+    <td>string</td>
+    <td>Username on the server specified in BACKUP_HOST</td>
+    <td>jacques</td>
+  </tr>
+  <tr>
+    <td>BACKUP_SSH_IDENTITY</td>
+    <td>string</td>
+    <td>The suffix on the ~/.ssh/id_rsa-IDENTITY used to authenticate to the BACKUP_HOST</td>
+    <td>sftp</td>
+  </tr>
+  <tr>
+    <td>BACKUP_REMOTE_DIR</td>
+    <td>string</td>
+    <td>The remote diretory where files are uploaded to</td>
+    <td>/users/home/jacques/remote-backups/joey/</td>
+  </tr>
+</table>
+
 ### Generate a SSH public/private key-pair
 
 Generate a public/private key-pair without a passphrase so that backups can be
