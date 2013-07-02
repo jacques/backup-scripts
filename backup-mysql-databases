@@ -17,16 +17,31 @@ set -o errexit
 set -o pipefail
 
 #
-# Load the configuration file (see config.example for a sample configuration
-# file)
+# Check that ~/.my.cnf exists
+#
+if [[ ! -f ~/.my.cnf ]]; then
+  echo "You need to create the ~/.my.cnf file into place"
+  exit 1
+fi
+
+#
+# Check that the config file exitss
 #
 if [[ ! -f config ]]; then
   echo "You need to copy config.example to config and customise to your liking."
   exit 1
 fi
 
+#
+# Load the configuration file (see config.example for a sample configuration
+# file)
+#
 source config
 
+#
+# Check that the backups directory exists if not create it and lock down
+# permissions
+#
 if [[ ! -d $BACKUP_BASE_DIR ]]; then
   /usr/bin/mkdir $BACKUP_BASE_DIR
   /usr/bin/chmod 700 $BACKUP_BASE_DIR
@@ -36,13 +51,25 @@ if [[ ! -d $BACKUP_BASE_DIR/mysql ]]; then
   /usr/bin/mkdir $BACKUP_BASE_DIR/mysql
 fi
 
+#
+# Retrieves the list of the users databases and excludes the Database (Header) and
+# the information_schema from the list of databases that will be dumped to
+# individual dump files.
+#
 DATABASES=$(/usr/local/bin/mysql --batch -e "show databases;" | /usr/local/bin/ggrep -v Database | /usr/local/bin/ggrep -v information_schema)
 for db in ${DATABASES[*]}
 do
   /opt/local/bin/mysqldump --quote-names --dump-date --routines --triggers --opt ${db} | /usr/local/bin/bzip2 -9 > ${BACKUP_BASE_DIR}/mysql/${db}-`date +%Y-%m-%d`.sql.bz2
 done
 
+#
+# Clean up the mysql dumps directory to the specified number of days worth of
+# MySQL dump files to keep around.
+#
 cd ${BACKUP_BASE_DIR}/mysql
 /usr/local/bin/gfind *.sql.bz2 -mtime +${MYSQL_DAYS_TO_KEEP} -delete
 
+#
+# Upload the backup files to a remote server
+#
 /opt/local/bin/rsync -avz ${RSYNC_OPTS} -e "ssh -i ${HOME}/.ssh/id_rsa-${BACKUP_SSH_IDENTITY}" ${BACKUP_BASE_DIR}/mysql ${BACKUP_USER}@${BACKUP_HOST}:${BACKUP_REMOTE_DIR}
