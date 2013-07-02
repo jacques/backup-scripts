@@ -41,3 +41,5 @@ for db in ${DATABASES[*]}
 do
   /opt/local/bin/mysqldump --quote-names --dump-date --routines --triggers --opt ${db} | /usr/local/bin/bzip2 -9 > ${BACKUP_BASE_DIR}/mysql/${db}-`date +%Y-%m-%d`.sql.bz2
 done
+
+/opt/local/bin/rsync -avz --dry-run -e "ssh -i ${HOME}/.ssh/id_rsa-${BACKUP_SSH_IDENTITY}" ${BACKUP_BASE_DIR}/mysql ${BACKUP_USER}@${BACKUP_HOST}:${BACKUP_REMOTE_DIR}
