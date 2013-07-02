@@ -20,6 +20,11 @@ set -o pipefail
 # Load the configuration file (see config.example for a sample configuration
 # file)
 #
+if [[ -f config ]]; then
+  echo "You need to copy config.example to config and customise to your liking."
+  exit 1
+fi
+
 source config
 
 if [[ ! -d $BACKUP_BASE_DIR ]]; then
