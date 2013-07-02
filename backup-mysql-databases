@@ -45,4 +45,4 @@ done
 cd ${BACKUP_BASE_DIR}/mysql
 /usr/local/bin/gfind *.sql.bz2 -mtime +${MYSQL_DAYS_TO_KEEP} -delete
 
-/opt/local/bin/rsync -avz --dry-run -e "ssh -i ${HOME}/.ssh/id_rsa-${BACKUP_SSH_IDENTITY}" ${BACKUP_BASE_DIR}/mysql ${BACKUP_USER}@${BACKUP_HOST}:${BACKUP_REMOTE_DIR}
+/opt/local/bin/rsync -avz ${RSYNC_OPTS} -e "ssh -i ${HOME}/.ssh/id_rsa-${BACKUP_SSH_IDENTITY}" ${BACKUP_BASE_DIR}/mysql ${BACKUP_USER}@${BACKUP_HOST}:${BACKUP_REMOTE_DIR}
