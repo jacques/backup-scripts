@@ -19,9 +19,47 @@ user = username
 password = password
 ```
 
+```
+MYSQL_DAYS_TO_KEEP=14
+```
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>MYSQL_DAYS_TO_KEEP</td>
+    <td>string</td>
+    <td>Number of days worth of backups to store (it removes files older than X days based on the file modification time)</td>
+    <td>14</td>
+  </tr>
+</table>
+
 ### PostgreSQL
 
 Expects a ~/.pgpass file to be configured.
+
+```
+PGSQL_DAYS_TO_KEEP=14
+```
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>PGSQL_DAYS_TO_KEEP</td>
+    <td>string</td>
+    <td>Number of days worth of backups to store (it removes files older than X days based on the file modification time)</td>
+    <td>14</td>
+  </tr>
+</table>
 
 ### Offsite Backups
 
