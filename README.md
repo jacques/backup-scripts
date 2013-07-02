@@ -70,6 +70,12 @@ RSYNC_OPTS=--delete-after
     <td>The remote diretory where files are uploaded to</td>
     <td>/users/home/jacques/remote-backups/joey/</td>
   </tr>
+  <tr>
+    <td>RSYNC_OPTS</td>
+    <td>string</td>
+    <td>Specifies options to rsync.  To do a "dry run" use --dry-run.</td>
+    <td>--delete-after</td>
+  </tr>
 </table>
 
 ### Generate a SSH public/private key-pair
