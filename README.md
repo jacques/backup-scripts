@@ -9,6 +9,17 @@ SmartMachines.
 Currenty expects to be run under SmartOS zones (useful if you're on a TextDrive
 Shared Hosting account on SmartOS or a Joyent SmartMachine).
 
+### SSH Keys
+
+Best to use seperate private/public key-pairs to authenticate to different services.
+
+In ~/.ssh/config use something like:
+
+```
+Host example.strongspace.com
+  IdentityFile ~/.ssh/id_rsa-strongspace
+```
+
 ### MySQL
 
 Expects a ~/.my.cnf file to be configured:
