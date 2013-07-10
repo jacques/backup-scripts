@@ -61,4 +61,4 @@ cd ${BACKUP_BASE_DIR}/pgsql
 #
 # Upload the backup files to a remote server
 #
-/opt/local/bin/rsync -avz ${RSYNC_OPTS} -e "ssh -i ${HOME}/.ssh/id_rsa-${BACKUP_SSH_IDENTITY}" ${BACKUP_BASE_DIR}/pgsql ${BACKUP_USER}@${BACKUP_HOST}:${BACKUP_REMOTE_DIR}
+/opt/local/bin/rsync -avz ${RSYNC_OPTS} ${BACKUP_BASE_DIR}/pgsql ${BACKUP_USER}@${BACKUP_HOST}:${BACKUP_REMOTE_DIR}
