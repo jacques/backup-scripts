@@ -22,7 +22,6 @@ POSTGRES_DATA_TO_KEEP=14
 #
 BACKUP_HOST=sftp.example.com
 BACKUP_USER=username
-BACKUP_SSH_IDENTITY=example
 BACKUP_REMOTE_DIR=/path/to/backups/
 
 RSYNC_OPTS=--delete-after
