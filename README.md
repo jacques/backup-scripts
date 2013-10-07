@@ -82,7 +82,6 @@ Presently supports backing up to a remote SFTP location.
 #
 BACKUP_HOST=sftp.example.com
 BACKUP_USER=username
-BACKUP_SSH_IDENTITY=example
 BACKUP_REMOTE_DIR=/path/to/backups/
 
 RSYNC_OPTS=--delete-after
@@ -106,12 +105,6 @@ RSYNC_OPTS=--delete-after
     <td>string</td>
     <td>Username on the server specified in BACKUP_HOST</td>
     <td>jacques</td>
-  </tr>
-  <tr>
-    <td>BACKUP_SSH_IDENTITY</td>
-    <td>string</td>
-    <td>The suffix on the ~/.ssh/id_rsa-IDENTITY used to authenticate to the BACKUP_HOST</td>
-    <td>sftp</td>
   </tr>
   <tr>
     <td>BACKUP_REMOTE_DIR</td>
