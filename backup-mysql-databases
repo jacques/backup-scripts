@@ -56,10 +56,10 @@ fi
 # the information_schema from the list of databases that will be dumped to
 # individual dump files.
 #
-DATABASES=$(/usr/local/bin/mysql --batch -e "show databases;" | /usr/local/bin/ggrep -v Database | /usr/local/bin/ggrep -v information_schema)
+DATABASES=$(/opt/local/bin/mysql --batch -e "show databases;" | /opt/local/bin/ggrep -v Database | /opt/local/bin/ggrep -v information_schema)
 for db in ${DATABASES[*]}
 do
-  /opt/local/bin/mysqldump --quote-names --dump-date --routines --triggers --opt ${db} | /usr/local/bin/bzip2 -9 > ${BACKUP_BASE_DIR}/mysql/${db}-`date +%Y-%m-%d`.sql.bz2
+  /opt/local/bin/mysqldump --quote-names --dump-date --routines --triggers --opt ${db} | /opt/local/bin/bzip2 -9 > ${BACKUP_BASE_DIR}/mysql/${db}-`date +%Y-%m-%d`.sql.bz2
 done
 
 #
