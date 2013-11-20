@@ -95,6 +95,12 @@ RSYNC_OPTS=--delete-after
     <th>Example</th>
   </tr>
   <tr>
+    <td>BACKUP_OFFSITE_ENABLED</td>
+    <td>string</td>
+    <td>Is offsite backup syncing enabled</td>
+    <td>yes</td>
+  </tr>
+  <tr>
     <td>BACKUP_HOST</td>
     <td>string</td>
     <td>Hostname or IP Address of the server where files are backed up to</td>
