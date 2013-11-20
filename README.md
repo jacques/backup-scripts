@@ -80,6 +80,7 @@ Presently supports backing up to a remote SFTP location.
 #
 # Backup Host
 #
+BACKUP_OFFSITE_ENABLED=yes
 BACKUP_HOST=sftp.example.com
 BACKUP_USER=username
 BACKUP_REMOTE_DIR=/path/to/backups/
