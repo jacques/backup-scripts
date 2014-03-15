@@ -1,12 +1,12 @@
 # Backup Scripts
 
-Various backup scripts for backing up your Shared Hosting account on TextDrive's
+Various backup scripts for backing up your Shared Hosting account on Kaizen Gardens
 Shared Hosting service.  Can also be used for backing up data on Joyent
-SmartMachines.
+SmartMachines and TextDrive's legacy Shared Hosting service.
 
 ## Getting Started
 
-Currenty expects to be run under SmartOS zones (useful if you're on a TextDrive
+Currenty expects to be run under SmartOS zones (useful if you're on a Kaizen Gardens
 Shared Hosting account on SmartOS or a Joyent SmartMachine).
 
 ### SSH Keys
