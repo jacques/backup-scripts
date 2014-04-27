@@ -5,6 +5,8 @@
 BZIP_PATH=/usr/bin
 GREP_PATH=/usr/bin
 GREP=grep
+FIND_PATH=/usr/bin
+FIND=find
 MYSQL_BIN_PATH=/Applications/MAMP/Library/bin
 RSYNC_PATH=/usr/bin
 
