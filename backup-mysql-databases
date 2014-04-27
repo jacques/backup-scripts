@@ -1,4 +1,4 @@
-s!/opt/local/bin/bash
+#!/bin/bash
 #
 # Dumps all databases belonging to a user to seperate dump files.
 #
@@ -15,14 +15,6 @@ if [[ "$1" == "-v" ]]; then
 fi
 set -o errexit
 set -o pipefail
-
-#
-# Check that ~/.my.cnf exists
-#
-if [[ ! -f ~/.my.cnf ]]; then
-  echo "You need to create the ~/.my.cnf file into place"
-  exit 1
-fi
 
 #
 # Check that the config file exitss
