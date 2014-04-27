@@ -1,8 +1,8 @@
-#!/opt/local/bin/bash
+s!/opt/local/bin/bash
 #
 # Dumps all databases belonging to a user to seperate dump files.
 #
-# Copyright (c) 2013 Jacques Marneweck.  All rights reserved.
+# Copyright (c) 2013-2014 Jacques Marneweck.  All rights reserved.
 #
 # Expects that you have a ~/.my.cnf configured to allow this script
 # to connect to MySQL in order to dump databases.
@@ -56,10 +56,10 @@ fi
 # the information_schema from the list of databases that will be dumped to
 # individual dump files.
 #
-DATABASES=$(/opt/local/bin/mysql --batch -e "show databases;" | /opt/local/bin/ggrep -v Database | /opt/local/bin/ggrep -v information_schema)
+DATABASES=$(${MYSQL_BIN_PATH}/mysql --batch -e "show databases;" | ${GREP_PATH}/${GREP} -v Database | ${GREP_PATH}/${GREP} -v information_schema)
 for db in ${DATABASES[*]}
 do
-  /opt/local/bin/mysqldump --quote-names --dump-date --routines --triggers --opt ${db} | /opt/local/bin/bzip2 -9 > ${BACKUP_BASE_DIR}/mysql/${db}-`date +%Y-%m-%d`.sql.bz2
+  ${MYSQL_BIN_PATH}/mysqldump --quote-names --dump-date --routines --triggers --opt ${db} | ${BZIP_PATH}/bzip2 -9 > ${BACKUP_BASE_DIR}/mysql/${db}-`date +%Y-%m-%d`.sql.bz2
 done
 
 #
@@ -73,5 +73,5 @@ cd ${BACKUP_BASE_DIR}/mysql
 # Upload the backup files to a remote server
 #
 if [[ $BACKUP_OFFSITE_ENABLED == "yes" ]]; then
-  /opt/local/bin/rsync -avz ${RSYNC_OPTS} ${BACKUP_BASE_DIR}/mysql ${BACKUP_USER}@${BACKUP_HOST}:${BACKUP_REMOTE_DIR}
+  ${RSYNC_PATH}/rsync -avz ${RSYNC_OPTS} ${BACKUP_BASE_DIR}/mysql ${BACKUP_USER}@${BACKUP_HOST}:${BACKUP_REMOTE_DIR}
 fi

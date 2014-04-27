@@ -2,6 +2,12 @@
 # Example configuration file
 #
 
+BZIP_PATH=/usr/bin
+GREP_PATH=/usr/bin
+GREP=grep
+MYSQL_BIN_PATH=/Applications/MAMP/Library/bin
+RSYNC_PATH=/usr/bin
+
 #
 # Directory to backup files to
 #
