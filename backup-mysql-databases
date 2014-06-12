@@ -84,6 +84,7 @@ if [[ $BACKUP_OFFSITE_ENABLED == "yes" ]]; then
     # Joyent's Manta Object Store
     #
     manta)
+      manta-sync ${BACKUP_BASE_DIR}/mysql ~~/stor/backups/
       ;;
     *)
       echo "Unknown backup type '${BACKUP_OFFSITE_TYPE}'"
