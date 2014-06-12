@@ -146,6 +146,14 @@ MANTA_URL=https://us-east.manta.joyent.com
 MANTA_USER=username
 ```
 
+You can obtain your SSH key's fingerprint you use for Manta by running:
+
+```
+ssh-keygen -l -f ~/.ssh/id_rsa-manta.pub
+```
+
+And change the id_rsa-manta.pub with your public key's filename.
+
 ### Generate a SSH public/private key-pair
 
 Generate a public/private key-pair without a passphrase so that backups can be
