@@ -79,7 +79,8 @@ Object Store. By default it assumes that you are using a SFTP location which
 enables you to use rsync to upload the files.  If you use Joyent's Manta
 Object Store, the assumptions are that you are placing the backups under your
 /$USERNAME/stor/backups/ directory which is configurable and that you will be
-storing two copies of the object in Joyent's Manta.
+storing two copies of the object in Joyent's Manta.  To upload to manta it
+requires that you have the manta and manta-sync node.js packages installed.
 
 ```
 #
@@ -132,6 +133,18 @@ RSYNC_OPTS=--delete-after
     <td>--delete-after</td>
   </tr>
 </table>
+
+
+#### Joyent Manta Object Store
+
+When using the Joyent Manta Object Store, it assumes that you have the following
+options in your configuration file:
+
+```
+MANTA_KEY_ID=your-ssh-key-id
+MANTA_URL=https://us-east.manta.joyent.com
+MANTA_USER=username
+```
 
 ### Generate a SSH public/private key-pair
 
