@@ -74,13 +74,20 @@ PGSQL_DAYS_TO_KEEP=14
 
 ### Offsite Backups
 
-Presently supports backing up to a remote SFTP location.
+Presently supports backing up to a remote SFTP location or to Joyent's Manta
+Object Store. By default it assumes that you are using a SFTP location which
+enables you to use rsync to upload the files.  If you use Joyent's Manta
+Object Store, the assumptions are that you are placing the backups under your
+/$USERNAME/stor/backups/ directory which is configurable and that you will be
+storing two copies of the object in Joyent's Manta.  To upload to manta it
+requires that you have the manta and manta-sync node.js packages installed.
 
 ```
 #
 # Backup Host
 #
 BACKUP_OFFSITE_ENABLED=yes
+BACKUP_OFFSITE_TYPE=ssh
 BACKUP_HOST=sftp.example.com
 BACKUP_USER=username
 BACKUP_REMOTE_DIR=/path/to/backups/
@@ -126,6 +133,26 @@ RSYNC_OPTS=--delete-after
     <td>--delete-after</td>
   </tr>
 </table>
+
+
+#### Joyent Manta Object Store
+
+When using the Joyent Manta Object Store, it assumes that you have the following
+options in your configuration file:
+
+```
+MANTA_KEY_ID=your-ssh-key-id
+MANTA_URL=https://us-east.manta.joyent.com
+MANTA_USER=username
+```
+
+You can obtain your SSH key's fingerprint you use for Manta by running:
+
+```
+ssh-keygen -l -f ~/.ssh/id_rsa-manta.pub
+```
+
+And change the id_rsa-manta.pub with your public key's filename.
 
 ### Generate a SSH public/private key-pair
 
